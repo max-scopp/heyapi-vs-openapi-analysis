@@ -4,9 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { DefaultService } from '../../client-openapi';
 
 @Component({
-    selector: 'app-openapi-basic',
-    template: ` <h1>{{ projectInfo()?.name }}</h1> `,
-    standalone: false
+  selector: 'app-openapi-basic',
+  template: ` <h1>{{ projectInfo()?.name }}</h1> `,
 })
 export class OpenApiBasicComponent {
   #activatedRoute = inject(ActivatedRoute);

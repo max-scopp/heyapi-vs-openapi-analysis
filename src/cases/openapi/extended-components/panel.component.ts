@@ -2,7 +2,6 @@ import { Component, computed, inject, input } from '@angular/core';
 import { ProjectInfoService } from './project-info.service';
 
 @Component({
-  standalone: true,
   selector: 'app-openapi-extended-panel',
   template: ` <h1>{{ projectInfo()?.name }}</h1> `,
   styles: [

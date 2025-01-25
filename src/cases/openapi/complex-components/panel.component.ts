@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { DefaultService } from '../../../client-openapi';
 
 @Component({
-  standalone: true,
   selector: 'app-openapi-panel',
   template: ` <h1>{{ projectInfo()?.name }}</h1> `,
   styles: [

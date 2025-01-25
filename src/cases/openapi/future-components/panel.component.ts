@@ -2,7 +2,6 @@ import { Component, computed, inject, input } from '@angular/core';
 import { ProjectInfoService } from './project-info.service';
 
 @Component({
-  standalone: true,
   selector: 'app-openapi-future-panel',
   template: ` <h1>{{ projectInfo()?.name }}</h1> `,
   styles: [
@@ -34,9 +33,9 @@ import { ProjectInfoService } from './project-info.service';
   },
 })
 export class OpenApiFuturePanelComponent {
-  visible = input.required();
-
   #projectInfoService = inject(ProjectInfoService);
+
+  visible = input.required();
 
   projectInfo = computed(() => this.#projectInfoService.projectInfo.value());
 }

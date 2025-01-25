@@ -3,8 +3,8 @@ import { HeyApiBreadcrumbComponent } from './complex-components/breadcrumb.compo
 import { HeyApiPanelComponent } from './complex-components/panel.component';
 
 @Component({
-    selector: 'app-hey-api-complex',
-    template: `
+  selector: 'app-hey-api-complex',
+  template: `
     <app-hey-api-breadcrumb />
 
     <hr />
@@ -12,8 +12,25 @@ import { HeyApiPanelComponent } from './complex-components/panel.component';
     <button (click)="togglePanel()">Show/Hide Details</button>
 
     <app-hey-api-panel [visible]="panelVisible()" />
+
+    <p>
+      Everything above the most basic fetch is covered, fully integrated with
+      current non-experimental features using the highly promoted declarative
+      and reactive apis. Comes with everything you need, ever.
+    </p>
+
+    <ul>
+      <li>Promise-based</li>
+      <li>Simple Usage</li>
+      <li>No Glue Code</li>
+      <li>Loosely coupled component</li>
+      <li>Full State Management</li>
+      <li>Proper no-fuzz, strongly typed error handling</li>
+      <li>Reactive</li>
+      <li>Data Sharing</li>
+    </ul>
   `,
-    imports: [HeyApiBreadcrumbComponent, HeyApiPanelComponent]
+  imports: [HeyApiBreadcrumbComponent, HeyApiPanelComponent],
 })
 export class HeyApiComplexComponent {
   panelVisible = signal(false);

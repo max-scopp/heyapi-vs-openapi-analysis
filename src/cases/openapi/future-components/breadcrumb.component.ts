@@ -2,7 +2,6 @@ import { Component, computed, inject } from '@angular/core';
 import { ProjectInfoService } from './project-info.service';
 
 @Component({
-  standalone: true,
   selector: 'app-openapi-future-breadcrumb',
   template: ` <h1>{{ projectInfo()?.name }}</h1> `,
 })

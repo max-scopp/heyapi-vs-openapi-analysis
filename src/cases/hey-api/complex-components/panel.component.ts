@@ -5,7 +5,6 @@ import { injectQuery } from '@tanstack/angular-query-experimental';
 import { getProjectInfoOptions } from '../../../client-heyapi/@tanstack/angular-query-experimental.gen';
 
 @Component({
-  standalone: true,
   selector: 'app-hey-api-panel',
   template: ` <h1>{{ projectInfo.data()?.name }}</h1> `,
   styles: [
