@@ -4,6 +4,7 @@ import { HeyApiComplexComponent } from '../cases/hey-api/complex.component';
 import { OpenApiBasicComponent } from '../cases/openapi/basic.component';
 import { OpenApiComplexComponent } from '../cases/openapi/complex.component';
 import { OpenApiExtendedComponent } from '../cases/openapi/extended.component';
+import { OpenApiFutureComponent } from '../cases/openapi/future.component';
 
 export const routes: Routes = [
   {
@@ -43,6 +44,10 @@ export const routes: Routes = [
       {
         path: 'complex',
         component: OpenApiComplexComponent,
+      },
+      {
+        path: 'future',
+        component: OpenApiFutureComponent,
       },
     ],
   },

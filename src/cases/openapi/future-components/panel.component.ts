@@ -1,11 +1,9 @@
 import { Component, computed, inject, input } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { ActivatedRoute } from '@angular/router';
-import { DefaultService } from '../../../client-openapi';
+import { ProjectInfoService } from './project-info.service';
 
 @Component({
   standalone: true,
-  selector: 'app-openapi-panel',
+  selector: 'app-openapi-future-panel',
   template: ` <h1>{{ projectInfo()?.name }}</h1> `,
   styles: [
     `
@@ -35,17 +33,10 @@ import { DefaultService } from '../../../client-openapi';
     '[class.visible]': 'visible()',
   },
 })
-export class OpenApiPanelComponent {
-  #activatedRoute = inject(ActivatedRoute);
-  #queryParams = toSignal(this.#activatedRoute.queryParams);
-
+export class OpenApiFuturePanelComponent {
   visible = input.required();
 
-  #defaultService = inject(DefaultService);
+  #projectInfoService = inject(ProjectInfoService);
 
-  readonly projectId = computed<string>(
-    () => this.#queryParams()?.['projectId'] ?? ''
-  );
-
-  projectInfo = toSignal(this.#defaultService.getProjectInfo(this.projectId()));
+  projectInfo = computed(() => this.#projectInfoService.projectInfo.value());
 }

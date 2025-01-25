@@ -1,14 +1,13 @@
-import { Component, computed, inject } from '@angular/core';
+import { computed, inject, Injectable, resource } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 import { DefaultService } from '../../../client-openapi';
 
-@Component({
-  standalone: true,
-  selector: 'app-openapi-breadcrumb',
-  template: ` <h1>{{ projectInfo()?.name }}</h1> `,
+@Injectable({
+  providedIn: 'root',
 })
-export class OpenApiBreadcrumbComponent {
+export class ProjectInfoService {
   #activatedRoute = inject(ActivatedRoute);
   #queryParams = toSignal(this.#activatedRoute.queryParams);
 
@@ -18,5 +17,9 @@ export class OpenApiBreadcrumbComponent {
     () => this.#queryParams()?.['projectId'] ?? ''
   );
 
-  projectInfo = toSignal(this.#defaultService.getProjectInfo(this.projectId()));
+  projectInfo = resource({
+    request: () => this.projectId(),
+    loader: () =>
+      firstValueFrom(this.#defaultService.getProjectInfo(this.projectId())),
+  });
 }

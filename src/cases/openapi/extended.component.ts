@@ -1,33 +1,21 @@
-import { Component, computed, effect, inject, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { ActivatedRoute } from '@angular/router';
-import { ProjectInfo } from '../../client-heyapi';
-import { DefaultService } from '../../client-openapi';
+import { Component, signal } from '@angular/core';
+import { OpenApiExtendedBreadcrumbComponent } from './extended-components/breadcrumb.component';
+import { OpenApiExtendedPanelComponent } from './extended-components/panel.component';
 
 @Component({
   selector: 'app-openapi-extended',
-  template: ` <h1>{{ projectInfo()?.name }}</h1> `,
-  standalone: false,
+  template: `
+    <app-openapi-extended-breadcrumb />
+
+    <hr />
+
+    <button (click)="togglePanel()">Show/Hide Details</button>
+
+    <app-openapi-extended-panel [visible]="panelVisible()" />
+  `,
+  imports: [OpenApiExtendedBreadcrumbComponent, OpenApiExtendedPanelComponent],
 })
 export class OpenApiExtendedComponent {
-  #activatedRoute = inject(ActivatedRoute);
-  #queryParams = toSignal(this.#activatedRoute.queryParams);
-
-  #defaultService = inject(DefaultService);
-
-  readonly projectId = computed<string>(
-    () => this.#queryParams()?.['projectId'] ?? ''
-  );
-
-  projectInfo = signal<ProjectInfo | null>(null);
-
-  constructor() {
-    effect(() => {
-      this.#defaultService
-        .getProjectInfo(this.projectId())
-        .subscribe((response) => {
-          this.projectInfo.set(response);
-        });
-    });
-  }
+  panelVisible = signal(false);
+  togglePanel = () => this.panelVisible.update((oldState) => !oldState);
 }

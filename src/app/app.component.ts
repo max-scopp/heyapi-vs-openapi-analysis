@@ -7,10 +7,10 @@ import {
 } from '@angular/router';
 
 @Component({
-    selector: 'app-root',
-    imports: [RouterOutlet, RouterModule],
-    templateUrl: './app.component.html',
-    styleUrl: './app.component.css'
+  selector: 'app-root',
+  imports: [RouterOutlet, RouterModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
   #router = inject(Router);
@@ -34,8 +34,10 @@ export class AppComponent {
 
   randomizeProjectId = () => {
     const projectIds = [1, 2, 3, 4];
-    this.projectId.set(
-      projectIds.at(Math.floor(Math.random() * projectIds.length))!
-    );
+    this.projectId.update((oldId) => {
+      const currentIndex = projectIds.indexOf(oldId);
+      const nextIndex = (currentIndex + 1) % projectIds.length;
+      return projectIds[nextIndex];
+    });
   };
 }
