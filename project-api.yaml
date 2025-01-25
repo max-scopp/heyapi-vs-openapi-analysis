@@ -1,0 +1,43 @@
+openapi: 3.0.1
+info:
+  title: Project Management API
+  description: An API to manage and get information about various projects.
+  version: 1.0.0
+
+paths:
+  /projects/{projectId}.json:
+    get:
+      summary: Get information about a project
+      description: Retrieves quick suggestions about a project based on the given project ID.
+      operationId: getProjectInfo
+      parameters:
+        - name: projectId
+          in: path
+          description: The ID of the project to retrieve info for.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Project information retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProjectInfo"
+        "404":
+          description: Project not found
+
+components:
+  schemas:
+    ProjectInfo:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the project.
+        description:
+          type: string
+          description: A brief description of the project.
+      required:
+        - name
+        - description

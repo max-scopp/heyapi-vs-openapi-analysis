@@ -1,27 +1,85 @@
-# DemoApp
+# Compare heyapi vs openapi
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.7.
+CPU
 
-## Development server
+    AMD Ryzen 9 3900X 12-Core Processor
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+    Base speed:	3,80 GHz
+    Sockets:	1
+    Cores:	12
+    Logical processors:	24
 
-## Code scaffolding
+Memory
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+    16,0 GB
 
-## Build
+    Speed:	3600 MT/s
+    Slots used:	2 of 4
+    Form factor:	DIMM
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Big api source: https://tripletex.no/v2-docs/
 
-## Running unit tests
+## Perf Metric
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```
+Execution Times:
+openapi-generator-cli generate: 71.8766834 seconds (Did not finish)
+npx @hey-api/openapi-ts: 3.8726455 seconds
+Result: 'npx @hey-api/openapi-ts' was faster by 68.0040379 seconds.
+```
 
-## Running end-to-end tests
+## HeyAPI
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Pro:
 
-## Further help
+- Performant
+- Gute Dokumentation
+- Generiert wie als hättest du es selber geschrieben - Sehr gut lesbar
+- ist ein richtiger compiler und nutzt die native typescript compiler api
+- Da der TS AST genutzt wird extrem flexibel & anpassbar
+- Tiefe integration mit populären, data-fetching relevanten bibliotheken
+- Direkter, lösungsorientierter, schneller Support
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Con:
+
+- Aktuell kein Angular Client Support (Prototyp funktionsfähig)
+- Vergleichsweise jung
+
+Undecided:
+
+- Ebenso ein fork vom einer alten version
+
+---
+
+## OpenApi Tools
+
+Pros:
+
+- kann XML u.a. absetzen (aber warum wollen wir XML apis?)
+- Gruppiert in services - fühlt sich schön an, aber für mich kein effektiver vorteil
+
+Cons:
+
+- Träge
+- Template basiert
+- Dokumentation sehr technisch - verwirrend
+- Ich kann nur eine BASE_URL für alle clients definieren? Wie kann ich mehrere APIs in einer Applikation ansprechen?
+  - Siehe MOCS_Server use case
+- Services inhaltlich schwer nachvollziehbar
+  - alte DI
+  - methoden signatur überladung
+  - sehr verboser code
+- Unklarer Umgang für komplexere use-cases
+  - Machbar, aber sehr pflegebelastend
+
+Undecided:
+
+- Es gibt ein Cache, aber kein Cache Management?
+- OpenAPITools ist ein fork vom offiziellen?
+  https://openapi-generator.tech/docs/fork-qna#why-was-it-decided-to-fork-swagger-codegen
+
+## Alternativen
+
+- https://openapi-ts.dev/
+- https://www.stainless.com/
+- https://www.speakeasy.com/product/sdk-generation

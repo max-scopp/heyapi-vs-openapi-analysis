@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+html,
+body {
+  all: unset;
+  min-height: 100vh;
+
+  font-family: system-ui;
+}
+
+body {
+  display: grid;
+}
+
+router-outlet {
+  display: contents;
+}
