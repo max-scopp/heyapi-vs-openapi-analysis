@@ -3,9 +3,8 @@ import { OpenApiBreadcrumbComponent } from './complex-components/breadcrumb.comp
 import { OpenApiPanelComponent } from './complex-components/panel.component';
 
 @Component({
-  standalone: true,
-  selector: 'app-openapi-complex',
-  template: `
+    selector: 'app-openapi-complex',
+    template: `
     <app-openapi-breadcrumb />
 
     <hr />
@@ -14,7 +13,7 @@ import { OpenApiPanelComponent } from './complex-components/panel.component';
 
     <app-openapi-panel [visible]="panelVisible()" />
   `,
-  imports: [OpenApiBreadcrumbComponent, OpenApiPanelComponent],
+    imports: [OpenApiBreadcrumbComponent, OpenApiPanelComponent]
 })
 export class OpenApiComplexComponent {
   panelVisible = signal(false);

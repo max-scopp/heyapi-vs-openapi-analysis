@@ -4,8 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 import { getProjectInfo, ProjectInfo } from '../../client-heyapi';
 
 @Component({
-  selector: 'app-hey-api-basic',
-  template: ` <h1>{{ projectInfo()?.name }}</h1> `,
+    selector: 'app-hey-api-basic',
+    template: ` <h1>{{ projectInfo()?.name }}</h1> `,
+    standalone: false
 })
 export class HeyApiBasicComponent implements OnInit {
   #activatedRoute = inject(ActivatedRoute);

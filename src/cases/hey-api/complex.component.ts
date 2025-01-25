@@ -3,9 +3,8 @@ import { HeyApiBreadcrumbComponent } from './complex-components/breadcrumb.compo
 import { HeyApiPanelComponent } from './complex-components/panel.component';
 
 @Component({
-  standalone: true,
-  selector: 'app-hey-api-complex',
-  template: `
+    selector: 'app-hey-api-complex',
+    template: `
     <app-hey-api-breadcrumb />
 
     <hr />
@@ -14,7 +13,7 @@ import { HeyApiPanelComponent } from './complex-components/panel.component';
 
     <app-hey-api-panel [visible]="panelVisible()" />
   `,
-  imports: [HeyApiBreadcrumbComponent, HeyApiPanelComponent],
+    imports: [HeyApiBreadcrumbComponent, HeyApiPanelComponent]
 })
 export class HeyApiComplexComponent {
   panelVisible = signal(false);

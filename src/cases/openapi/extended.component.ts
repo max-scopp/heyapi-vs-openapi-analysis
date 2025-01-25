@@ -5,8 +5,9 @@ import { ProjectInfo } from '../../client-heyapi';
 import { DefaultService } from '../../client-openapi';
 
 @Component({
-  selector: 'app-openapi-basic',
-  template: ` <h1>{{ projectInfo()?.name }}</h1> `,
+    selector: 'app-openapi-basic',
+    template: ` <h1>{{ projectInfo()?.name }}</h1> `,
+    standalone: false
 })
 export class OpenApiBasicComponent {
   #activatedRoute = inject(ActivatedRoute);
