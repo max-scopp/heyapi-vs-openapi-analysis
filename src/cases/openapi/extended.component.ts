@@ -5,11 +5,11 @@ import { ProjectInfo } from '../../client-heyapi';
 import { DefaultService } from '../../client-openapi';
 
 @Component({
-    selector: 'app-openapi-basic',
-    template: ` <h1>{{ projectInfo()?.name }}</h1> `,
-    standalone: false
+  selector: 'app-openapi-extended',
+  template: ` <h1>{{ projectInfo()?.name }}</h1> `,
+  standalone: false,
 })
-export class OpenApiBasicComponent {
+export class OpenApiExtendedComponent {
   #activatedRoute = inject(ActivatedRoute);
   #queryParams = toSignal(this.#activatedRoute.queryParams);
 
