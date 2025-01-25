@@ -42,6 +42,10 @@ In addition to this isolated case, MrLubos from HeyAPI has shown strong commitme
 
 Therefore, I firmly stand behind my decisions. With a clear vision and collaborative support from high-quality community libraries, I believe we can achieve the perfect balance between innovation and velocity.
 
+## Read Up
+
+https://michalzalecki.com/elegant-frontend-architecture/
+
 ## HeyAPI
 
 Pro:
