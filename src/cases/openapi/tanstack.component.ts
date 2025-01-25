@@ -1,25 +1,15 @@
 import { Component, computed, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
+import { injectQuery } from '@tanstack/angular-query-experimental';
+import { lastValueFrom } from 'rxjs';
 import { DefaultService } from '../../client-openapi';
 
 @Component({
-  selector: 'app-openapi-basic',
-  template: `
-    <h1>{{ projectInfo()?.name }}</h1>
-
-    <ul>
-      <li>Obserables</li>
-      <li>No State Management</li>
-      <li>
-        Not Reactive (can be done, but required manual synchronization - riskier
-        than effect)
-      </li>
-      <li>Might require a bigger mental picture of the Controllers</li>
-    </ul>
-  `,
+  selector: 'app-openapi-tanstack',
+  template: ` <h1>{{ projectInfo.data()?.name }}</h1> `,
 })
-export class OpenApiBasicComponent {
+export class OpenApiTanstackComponent {
   #activatedRoute = inject(ActivatedRoute);
   #queryParams = toSignal(this.#activatedRoute.queryParams);
 
@@ -29,5 +19,9 @@ export class OpenApiBasicComponent {
     () => this.#queryParams()?.['projectId'] ?? ''
   );
 
-  projectInfo = toSignal(this.#defaultService.getProjectInfo(this.projectId()));
+  projectInfo = injectQuery(() => ({
+    queryKey: ['project', this.projectId()],
+    queryFn: () =>
+      lastValueFrom(this.#defaultService.getProjectInfo(this.projectId())),
+  }));
 }

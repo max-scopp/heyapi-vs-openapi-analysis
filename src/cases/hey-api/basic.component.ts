@@ -1,4 +1,4 @@
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { getProjectInfo, ProjectInfo } from '../../client-heyapi';
@@ -8,18 +8,18 @@ import { getProjectInfo, ProjectInfo } from '../../client-heyapi';
   template: `
     <h1>{{ projectInfo()?.name }}</h1>
     <p>
-      Very simple, bare-metal solution well suited for low-level implmentation
-      solutions such as devextreme.
+      Very simple, bare-metal solution well suited for low-level solutions such
+      as working with devextreme.
     </p>
 
     <ul>
       <li>Promise-based</li>
-      <li>No State Management</li>
-      <li>Might need some overhead</li>
+      <li>Only fires the fetch when requested</li>
+      <li>(can be) Reactive, but using an effect</li>
     </ul>
   `,
 })
-export class HeyApiBasicComponent implements OnInit {
+export class HeyApiBasicComponent {
   #activatedRoute = inject(ActivatedRoute);
   #queryParams = toSignal(this.#activatedRoute.queryParams);
 
@@ -27,25 +27,19 @@ export class HeyApiBasicComponent implements OnInit {
     () => this.#queryParams()?.['projectId'] ?? ''
   );
 
-  projectInfo = signal<ProjectInfo | null>(null);
+  projectInfo = signal<ProjectInfo | undefined>(undefined);
 
-  async ngOnInit() {
-    const projectId = this.projectId();
+  constructor() {
+    effect(async () => {
+      const projectId = this.projectId();
 
-    if (!projectId) {
-      throw new Error('Component expects project id');
-    }
+      const projectsByProjectIdInfo = await getProjectInfo({
+        path: {
+          projectId,
+        },
+      });
 
-    const projectsByProjectIdInfo = await getProjectInfo({
-      path: {
-        projectId,
-      },
+      this.projectInfo.set(projectsByProjectIdInfo.data);
     });
-
-    if (!projectsByProjectIdInfo.data) {
-      throw new Error('Failed to load project infos');
-    }
-
-    this.projectInfo.set(projectsByProjectIdInfo.data);
   }
 }

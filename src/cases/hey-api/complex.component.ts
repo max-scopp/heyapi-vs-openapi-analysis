@@ -15,9 +15,16 @@ import { HeyApiPanelComponent } from './complex-components/panel.component';
 
     <p>
       Everything above the most basic fetch is covered, fully integrated with
-      current non-experimental features using the highly promoted declarative
-      and reactive apis. Comes with everything you need, ever.
+      ready-to-use (about to be) non-experimental features using the highly
+      promoted declarative and reactive apis. Comes with everything you need,
+      ever.
     </p>
+
+    <a
+      href="https://github.com/TanStack/query/discussions/6293#discussioncomment-11382960"
+      target="_blank"
+      >Re: TanStack Query Angular</a
+    >
 
     <ul>
       <li>Promise-based</li>

@@ -5,6 +5,7 @@ import { OpenApiBasicComponent } from '../cases/openapi/basic.component';
 import { OpenApiComplexComponent } from '../cases/openapi/complex.component';
 import { OpenApiExtendedComponent } from '../cases/openapi/extended.component';
 import { OpenApiFutureComponent } from '../cases/openapi/future.component';
+import { OpenApiTanstackComponent } from '../cases/openapi/tanstack.component';
 
 export const routes: Routes = [
   {
@@ -44,6 +45,10 @@ export const routes: Routes = [
       {
         path: 'complex',
         component: OpenApiComplexComponent,
+      },
+      {
+        path: 'tanstack',
+        component: OpenApiTanstackComponent,
       },
       {
         path: 'future',
