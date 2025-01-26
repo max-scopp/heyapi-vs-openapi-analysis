@@ -13,6 +13,8 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: Infinity,
+      throwOnError: true,
+      retry: 0,
     },
   },
 });
