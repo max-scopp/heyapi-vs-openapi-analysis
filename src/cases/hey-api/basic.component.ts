@@ -1,12 +1,4 @@
-import {
-  Component,
-  computed,
-  effect,
-  inject,
-  Injector,
-  runInInjectionContext,
-  signal,
-} from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { getProjectInfo, ProjectInfo } from '../../client-heyapi';
@@ -38,20 +30,17 @@ export class HeyApiBasicComponent {
   projectInfo = signal<ProjectInfo | undefined>(undefined);
 
   constructor() {
-    const injectionCtx = inject(Injector);
-    effect(() => {
+    effect(async () => {
       const projectId = this.projectId();
 
       // required for this use case sadly
-      runInInjectionContext(injectionCtx, async () => {
-        const projectsByProjectIdInfo = await getProjectInfo({
-          path: {
-            projectId,
-          },
-        });
-
-        this.projectInfo.set(projectsByProjectIdInfo.data);
+      const projectsByProjectIdInfo = await getProjectInfo({
+        path: {
+          projectId,
+        },
       });
+
+      this.projectInfo.set(projectsByProjectIdInfo.data);
     });
   }
 }
