@@ -6,7 +6,8 @@ import { getProjectInfoOptions } from '../../../client-heyapi/@tanstack/angular-
 
 @Component({
   selector: 'app-hey-api-breadcrumb',
-  template: ` <h1>{{ projectInfo.data()?.name }}</h1> `,
+  template: ` <h1>{{ projectInfo.data()?.name }}</h1>
+    {{ projectInfo.error() }}`,
 })
 export class HeyApiBreadcrumbComponent {
   #activatedRoute = inject(ActivatedRoute);
@@ -16,11 +17,13 @@ export class HeyApiBreadcrumbComponent {
     String(this.#queryParams()?.['projectId'])
   );
 
-  projectInfo = injectQuery(() =>
-    getProjectInfoOptions({
-      path: {
-        projectId: this.projectId(),
-      },
-    })
-  );
+  projectInfo = injectQuery(() => {
+    return {
+      ...getProjectInfoOptions({
+        path: {
+          projectId: this.projectId(),
+        },
+      }),
+    };
+  });
 }

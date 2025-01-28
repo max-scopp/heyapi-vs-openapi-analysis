@@ -33,6 +33,7 @@ export class HeyApiBasicComponent {
     effect(async () => {
       const projectId = this.projectId();
 
+      // required for this use case sadly
       const projectsByProjectIdInfo = await getProjectInfo({
         path: {
           projectId,
